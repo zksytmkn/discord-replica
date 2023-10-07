@@ -1,3 +1,4 @@
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { IcBaselineHeadphones } from "@/components/icones/icBaselineHeadphones";
 import { IcBaselineMic } from "@/components/icones/icBaselineMic";
 import { IcRoundSettings } from "@/components/icones/icRoundSettings";
@@ -10,7 +11,7 @@ export default function Sidebar() {
     <div className="flex flex-0.3 h-screen">
       {/* sidebarLeft */}
       <div className="flex flex-col items-center bg-[#1a1c20] py-2 px-4">
-        <div className="w-15 h-15 bg-[#33363d] rounded-full my-2 p-1">
+        <div className="my-2 p-1">
           <img className="w-12" src="./discord.png" alt="" />
         </div>
         <div className="w-15 h-15 bg-[#33363d] rounded-full my-2 p-1">
@@ -26,7 +27,7 @@ export default function Sidebar() {
 
         {/* sidebarChannels */}
         <div className="p-3">
-          <div className="text-[white] flex justify-between items-center mt-1">
+          <div className="text-white flex justify-between items-center mt-1">
             <div className="flex items-center">
               <RadixIconsChevronDown />
               <h4>プログラミングチャンネル</h4>
@@ -43,9 +44,12 @@ export default function Sidebar() {
 
           <div className="absolute bottom-0 flex items-center justify-between w-11/12 py-2 border-t border-solid border-[#686a6e] ml-">
             <div className="flex items-center">
-              <img className="w-14" src="./nekomaru.png" alt="" />
+              <Avatar>
+                <AvatarImage src="./nekomaru.png" />
+                <AvatarFallback>CN</AvatarFallback>
+              </Avatar>
               <div className="ml-1">
-                <h4 className="text-[white] font-medium">nakamoto</h4>
+                <h4 className="text-white font-medium">nakamoto</h4>
                 <span className="text-[#686a6e]">#8142</span>
               </div>
             </div>
