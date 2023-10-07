@@ -22,7 +22,7 @@ export default function Chat() {
         <IcBaselineAddCircleOutline />
         <form className="grow">
           <input
-            className="p-4 bg-[transparent] border-none outline-none text-[white] text-lg w-full"
+            className="p-4 bg-transparent border-none outline-none text-white text-lg w-full"
             type="text"
             placeholder="#Udemyへメッセージを送信"
           />
