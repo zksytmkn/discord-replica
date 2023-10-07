@@ -7,19 +7,18 @@ import SidebarChannel from "@/components/sidebar/sidebarChannel";
 
 export default function Sidebar() {
   return (
-    // Move to home later
-    <div className="flex flex-0.35 h-screen bg-[#33363d]">
+    <div className="flex flex-0.3 h-screen">
       {/* sidebarLeft */}
       <div className="flex flex-col items-center bg-[#1a1c20] py-2 px-4">
         <div className="w-15 h-15 bg-[#33363d] rounded-full my-2 p-1">
-          <img className="w-12" src="./react.png" alt="" />
+          <img className="w-12" src="./discord.png" alt="" />
         </div>
         <div className="w-15 h-15 bg-[#33363d] rounded-full my-2 p-1">
           <img className="w-12" src="./react.png" alt="" />
         </div>
       </div>
       {/* sidebarRight */}
-      <div className="bg-[#2b2d33] w-72 relative">
+      <div className="bg-[#2b2d33] w-72 relative grow">
         <div className="text-[#ffffff] flex items-center justify-between p-5">
           <h1>Discord</h1>
           <RadixIconsChevronDown />
