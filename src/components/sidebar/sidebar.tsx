@@ -1,3 +1,7 @@
+"use client";
+
+import { useRouter } from "next/navigation";
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { IcBaselineHeadphones } from "@/components/icones/icBaselineHeadphones";
 import { IcBaselineMic } from "@/components/icones/icBaselineMic";
@@ -7,6 +11,14 @@ import { RadixIconsPlus } from "@/components/icones/radixIconsPlus";
 import SidebarChannel from "@/components/sidebar/sidebarChannel";
 
 export default function Sidebar() {
+  const supabase = createClientComponentClient();
+  const router = useRouter();
+
+  const handleSignOut = async () => {
+    await supabase.auth.signOut();
+    router.refresh();
+  };
+
   return (
     <div className="flex flex-0.3 h-screen">
       {/* sidebarLeft */}
@@ -44,7 +56,7 @@ export default function Sidebar() {
 
           <div className="absolute bottom-0 flex items-center justify-between w-11/12 py-2 border-t border-solid border-[#686a6e] ml-">
             <div className="flex items-center">
-              <Avatar>
+              <Avatar onClick={handleSignOut}>
                 <AvatarImage src="./nekomaru.png" />
                 <AvatarFallback>CN</AvatarFallback>
               </Avatar>
