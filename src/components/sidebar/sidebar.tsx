@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import { UserMetadata } from "@supabase/supabase-js";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { IcBaselineHeadphones } from "@/components/icones/icBaselineHeadphones";
 import { IcBaselineMic } from "@/components/icones/icBaselineMic";
@@ -10,7 +11,7 @@ import { RadixIconsChevronDown } from "@/components/icones/radixIconsChevronDown
 import { RadixIconsPlus } from "@/components/icones/radixIconsPlus";
 import SidebarChannel from "@/components/sidebar/sidebarChannel";
 
-export default function Sidebar() {
+export default function Sidebar({ user }: { user: UserMetadata | undefined }) {
   const supabase = createClientComponentClient();
   const router = useRouter();
 
@@ -57,12 +58,14 @@ export default function Sidebar() {
           <div className="absolute bottom-0 flex items-center justify-between w-11/12 py-2 border-t border-solid border-[#686a6e] ml-">
             <div className="flex items-center">
               <Avatar onClick={handleSignOut}>
-                <AvatarImage src="./nekomaru.png" />
+                <AvatarImage src={user?.avatar_url} />
                 <AvatarFallback>CN</AvatarFallback>
               </Avatar>
               <div className="ml-1">
-                <h4 className="text-white font-medium">nakamoto</h4>
-                <span className="text-[#686a6e]">#8142</span>
+                <h4 className="text-white font-medium">{user?.name || "unknown"}</h4>
+                <span className="text-[#686a6e]">
+                  {`#${user?.provider_id ? user.provider_id.substring(0, 4) : "#unknown"}`}
+                </span>
               </div>
             </div>
 
