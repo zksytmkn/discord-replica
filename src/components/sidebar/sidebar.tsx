@@ -1,8 +1,10 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { UserMetadata } from "@supabase/supabase-js";
+import { Channel } from "@/types/channel";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { IcBaselineHeadphones } from "@/components/icones/icBaselineHeadphones";
 import { IcBaselineMic } from "@/components/icones/icBaselineMic";
@@ -18,6 +20,24 @@ export default function Sidebar({ user }: { user: UserMetadata | undefined }) {
   const handleSignOut = async () => {
     await supabase.auth.signOut();
     router.refresh();
+  };
+
+  const [channels, setChannels] = useState<Channel[]>([]);
+  useEffect(() => {
+    const fetchChannels = async () => {
+      const { data } = await supabase.from("channels").select();
+      setChannels(data || []);
+    };
+
+    fetchChannels();
+  }, []);
+
+  const addChannel = async () => {
+    let channelName = prompt("Create a new channel");
+    if (channelName) {
+      const { data } = await supabase.from("channels").insert({ name: channelName }).select();
+      setChannels((data ? [...channels, ...data] : channels) || []);
+    }
   };
 
   return (
@@ -45,14 +65,13 @@ export default function Sidebar({ user }: { user: UserMetadata | undefined }) {
               <RadixIconsChevronDown />
               <h4>プログラミングチャンネル</h4>
             </div>
-            <RadixIconsPlus className="cursor-pointer" />
+            <RadixIconsPlus className="cursor-pointer" onClick={addChannel} />
           </div>
 
           <div className="sidebarChennelList">
-            <SidebarChannel />
-            <SidebarChannel />
-            <SidebarChannel />
-            <SidebarChannel />
+            {channels.map((channel) => (
+              <SidebarChannel id={channel.id} channel={channel} key={channel.id} />
+            ))}
           </div>
 
           <div className="absolute bottom-0 flex items-center justify-between w-11/12 py-2 border-t border-solid border-[#686a6e] ml-">
