@@ -62,15 +62,15 @@ export default function Sidebar({ user }: { user: UserMetadata | undefined }) {
         <div className="p-3">
           <div className="text-white flex justify-between items-center mt-1">
             <div className="flex items-center">
-              <RadixIconsChevronDown />
-              <h4>プログラミングチャンネル</h4>
+              <RadixIconsChevronDown className="mr-1" />
+              <h4>Programming Channel</h4>
             </div>
             <RadixIconsPlus className="cursor-pointer" onClick={addChannel} />
           </div>
 
           <div className="sidebarChennelList">
             {channels.map((channel) => (
-              <SidebarChannel id={channel.id} channel={channel} key={channel.id} />
+              <SidebarChannel channel={channel} key={channel.id} />
             ))}
           </div>
 

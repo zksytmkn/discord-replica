@@ -1,3 +1,7 @@
+"use client";
+
+import { useAtom } from "jotai";
+import { channelAtom } from "@/state/channel";
 import ChatHeader from "@/components/chat/chatHeader";
 import ChatMessage from "@/components/chat/chatMessage";
 import { IcBaselineAddCircleOutline } from "@/components/icones/icBaselineAddCircleOutline";
@@ -6,10 +10,12 @@ import { IcBaselineGif } from "@/components/icones/icBaselineGif";
 import { IcOutlineCardGiftcard } from "@/components/icones/icOutlineCardGiftcard";
 
 export default function Chat() {
+  const [channel] = useAtom(channelAtom);
+
   return (
     <div className="flex flex-col grow bg-[#33363d]">
       {/* chatHeader */}
-      <ChatHeader />
+      <ChatHeader channel={channel} />
       {/* chatMessage */}
       <div className="grow">
         <ChatMessage />

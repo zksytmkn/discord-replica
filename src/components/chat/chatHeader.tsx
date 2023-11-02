@@ -4,14 +4,21 @@ import { IcBaselinePeopleAlt } from "@/components/icones/icBaselinePeopleAlt";
 import { IcBaselinePushPin } from "@/components/icones/icBaselinePushPin";
 import { IcBaselineSend } from "@/components/icones/icBaselineSend";
 import { Input } from "@/components/ui/input";
+import { Channel } from "@/types/channel";
 
-export default function ChatHeader() {
+type Props = {
+  channel: Channel | null;
+};
+
+export default function ChatHeader(props: Props) {
+  const { channel } = props;
+
   return (
     <div className="flex items-center justify-between w-full pt-2">
       <div className="pl-4">
         <h3 className="text-white">
           <span className="text-[#7b7c85] pr-2">#</span>
-          Udemy
+          {channel ? channel.name : "No channel selected"}
         </h3>
       </div>
 
