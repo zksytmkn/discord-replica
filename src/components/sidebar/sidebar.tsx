@@ -1,7 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useHydrateAtoms } from "jotai/utils";
+import { channelAtom } from "@/state/channel";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { UserMetadata } from "@supabase/supabase-js";
 import { Channel } from "@/types/channel";
@@ -13,7 +15,13 @@ import { RadixIconsChevronDown } from "@/components/icones/radixIconsChevronDown
 import { RadixIconsPlus } from "@/components/icones/radixIconsPlus";
 import SidebarChannel from "@/components/sidebar/sidebarChannel";
 
-export default function Sidebar({ user }: { user: UserMetadata | undefined }) {
+export default function Sidebar({
+  user,
+  channels: initialChannels,
+}: {
+  user: UserMetadata | undefined;
+  channels: Channel[] | [];
+}) {
   const supabase = createClientComponentClient();
   const router = useRouter();
 
@@ -22,15 +30,7 @@ export default function Sidebar({ user }: { user: UserMetadata | undefined }) {
     router.refresh();
   };
 
-  const [channels, setChannels] = useState<Channel[]>([]);
-  useEffect(() => {
-    const fetchChannels = async () => {
-      const { data } = await supabase.from("channels").select();
-      setChannels(data || []);
-    };
-
-    fetchChannels();
-  }, []);
+  const [channels, setChannels] = useState<Channel[]>(initialChannels);
 
   const addChannel = async () => {
     let channelName = prompt("Create a new channel");
@@ -39,6 +39,8 @@ export default function Sidebar({ user }: { user: UserMetadata | undefined }) {
       setChannels((data ? [...channels, ...data] : channels) || []);
     }
   };
+
+  useHydrateAtoms([[channelAtom, initialChannels[0]]]);
 
   return (
     <div className="flex flex-0.3 h-screen">
