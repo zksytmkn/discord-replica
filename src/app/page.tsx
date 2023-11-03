@@ -14,6 +14,10 @@ export default async function Home() {
   } = await supabase.auth.getUser();
   const metadata = user?.user_metadata;
   const { data: channels } = await supabase.from("channels").select();
+  const { data: messages } = await supabase
+    .from("messages")
+    .select()
+    .match({ channel_id: channels ? channels[0].id : null });
 
   return (
     <>
@@ -21,7 +25,7 @@ export default async function Home() {
         {session ? (
           <>
             <Sidebar user={metadata} channels={channels || []} />
-            <Chat />
+            <Chat messages={messages || []} />
           </>
         ) : (
           <>
