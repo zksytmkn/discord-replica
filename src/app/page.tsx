@@ -13,13 +13,14 @@ export default async function Home() {
     data: { user },
   } = await supabase.auth.getUser();
   const metadata = user?.user_metadata;
+  const { data: channels } = await supabase.from("channels").select();
 
   return (
     <>
       <div className="flex overflow-y-hidden">
         {session ? (
           <>
-            <Sidebar user={metadata} />
+            <Sidebar user={metadata} channels={channels || []} />
             <Chat />
           </>
         ) : (
