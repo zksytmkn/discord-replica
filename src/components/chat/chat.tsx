@@ -1,7 +1,10 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { useAtom } from "jotai";
 import { channelAtom } from "@/state/channel";
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import { Message } from "@/types/message";
 import ChatHeader from "@/components/chat/chatHeader";
 import ChatMessage from "@/components/chat/chatMessage";
 import { IcBaselineAddCircleOutline } from "@/components/icones/icBaselineAddCircleOutline";
@@ -9,8 +12,29 @@ import { IcBaselineEmojiEmotions } from "@/components/icones/icBaselineEmojiEmot
 import { IcBaselineGif } from "@/components/icones/icBaselineGif";
 import { IcOutlineCardGiftcard } from "@/components/icones/icOutlineCardGiftcard";
 
-export default function Chat() {
+export default function Chat({ messages: initialMessages }: { messages: Message[] | [] }) {
   const [channel] = useAtom(channelAtom);
+  const supabase = createClientComponentClient();
+  const [messages, setMessages] = useState<Message[]>(initialMessages);
+  const [inputText, setInputText] = useState<string>("");
+
+  useEffect(() => {
+    const getMessages = async () => {
+      const { data } = await supabase.from("messages").select().match({ channel_id: channel?.id });
+      setMessages(data ? data : []);
+    };
+
+    getMessages();
+  }, [channel]);
+
+  const sendMessage = async (e: React.MouseEvent<HTMLElement>) => {
+    e.preventDefault();
+    if (inputText) {
+      const { data } = await supabase.from("messages").insert({ message: inputText, channel_id: channel?.id }).select();
+      setMessages(data ? [...messages, ...data] : messages);
+      setInputText("");
+    }
+  };
 
   return (
     <div className="flex flex-col grow bg-[#33363d]">
@@ -18,10 +42,9 @@ export default function Chat() {
       <ChatHeader channel={channel} />
       {/* chatMessage */}
       <div className="grow">
-        <ChatMessage />
-        <ChatMessage />
-        <ChatMessage />
-        <ChatMessage />
+        {messages.map((message) => (
+          <ChatMessage message={message} key={message.id} />
+        ))}
       </div>
       {/* chatInput */}
       <div className="flex items-center justify-between p-4 bg-[#474b53] rounded m-5 text-[lightgray]">
@@ -30,10 +53,13 @@ export default function Chat() {
           <input
             className="p-4 bg-transparent border-none outline-none text-white text-lg w-full"
             type="text"
-            placeholder="#Udemyへメッセージを送信"
+            placeholder={channel?.name ? `Send a message to #${channel.name}` : ""}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setInputText(e.target.value)}
+            value={inputText}
+            disabled={Boolean(!channel?.id)}
           />
-          <button className="hidden" type="submit">
-            送信
+          <button className="hidden" type="submit" onClick={(e: React.MouseEvent<HTMLElement>) => sendMessage(e)}>
+            Send
           </button>
         </form>
 

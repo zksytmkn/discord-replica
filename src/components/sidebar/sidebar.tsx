@@ -36,7 +36,7 @@ export default function Sidebar({
     let channelName = prompt("Create a new channel");
     if (channelName) {
       const { data } = await supabase.from("channels").insert({ name: channelName }).select();
-      setChannels((data ? [...channels, ...data] : channels) || []);
+      setChannels(data ? [...channels, ...data] : channels);
     }
   };
 
