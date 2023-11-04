@@ -2,36 +2,38 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { useHydrateAtoms } from "jotai/utils";
+
 import { channelAtom } from "@/state/channel";
+import { Channels, Database } from "@/types/supabase";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { UserMetadata } from "@supabase/supabase-js";
-import { Channel } from "@/types/channel";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { useHydrateAtoms } from "jotai/utils";
+
 import { IcBaselineHeadphones } from "@/components/icones/icBaselineHeadphones";
 import { IcBaselineMic } from "@/components/icones/icBaselineMic";
 import { IcRoundSettings } from "@/components/icones/icRoundSettings";
 import { RadixIconsChevronDown } from "@/components/icones/radixIconsChevronDown";
 import { RadixIconsPlus } from "@/components/icones/radixIconsPlus";
 import SidebarChannel from "@/components/sidebar/sidebarChannel";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 export default function Sidebar({
   user,
   channels: initialChannels,
 }: {
   user: UserMetadata | undefined;
-  channels: Channel[] | [];
+  channels: Channels[];
 }) {
-  const supabase = createClientComponentClient();
-  const router = useRouter();
+  useHydrateAtoms([[channelAtom, initialChannels[0]]]);
 
+  const supabase = createClientComponentClient<Database>();
+  const router = useRouter();
   const handleSignOut = async () => {
     await supabase.auth.signOut();
     router.refresh();
   };
 
-  const [channels, setChannels] = useState<Channel[]>(initialChannels);
-
+  const [channels, setChannels] = useState<Channels[]>(initialChannels);
   const addChannel = async () => {
     let channelName = prompt("Create a new channel");
     if (channelName) {
@@ -39,8 +41,6 @@ export default function Sidebar({
       setChannels(data ? [...channels, ...data] : channels);
     }
   };
-
-  useHydrateAtoms([[channelAtom, initialChannels[0]]]);
 
   return (
     <div className="flex flex-0.3 h-screen">
@@ -71,7 +71,7 @@ export default function Sidebar({
           </div>
 
           <div className="sidebarChennelList">
-            {channels.map((channel) => (
+            {channels?.map((channel) => (
               <SidebarChannel channel={channel} key={channel.id} />
             ))}
           </div>

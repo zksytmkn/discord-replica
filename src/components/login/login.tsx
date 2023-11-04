@@ -1,11 +1,12 @@
 "use client";
 
+import { Database } from "@/types/supabase";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { Auth } from "@supabase/auth-ui-react";
 import { ThemeSupa } from "@supabase/auth-ui-shared";
 
 export default function Login() {
-  const supabase = createClientComponentClient();
+  const supabase = createClientComponentClient<Database>();
 
   return (
     <div className="flex flex-col justify-center items-center w-full h-screen gap-8">

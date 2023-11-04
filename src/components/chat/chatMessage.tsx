@@ -1,8 +1,9 @@
-import { Message } from "@/types/message";
+import { Messages } from "@/types/supabase";
+
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 type Props = {
-  message: Message;
+  message: Messages;
 };
 
 export default function ChatMessage(props: Props) {
@@ -11,12 +12,12 @@ export default function ChatMessage(props: Props) {
   return (
     <div className="flex items-center p-4 text-white mb-4">
       <Avatar>
-        <AvatarImage src="./nekomaru.png" />
+        <AvatarImage src={message.user?.avatar_url ?? ""} />
         <AvatarFallback>CN</AvatarFallback>
       </Avatar>
       <div className="py-5 pr-5 pl-2">
         <h4>
-          nakamoto
+          {message.user?.name || "unknown"}
           <span className="text-[#7b7c85] ml-5 text-base">{new Date(message.created_at).toLocaleString()}</span>
         </h4>
         <p>{message.message}</p>
