@@ -1,13 +1,14 @@
+import { Channels } from "@/types/supabase";
+
 import { IcBaselineHelp } from "@/components/icones/icBaselineHelp";
 import { IcBaselineNotifications } from "@/components/icones/icBaselineNotifications";
 import { IcBaselinePeopleAlt } from "@/components/icones/icBaselinePeopleAlt";
 import { IcBaselinePushPin } from "@/components/icones/icBaselinePushPin";
 import { IcBaselineSend } from "@/components/icones/icBaselineSend";
 import { Input } from "@/components/ui/input";
-import { Channel } from "@/types/channel";
 
 type Props = {
-  channel: Channel | null;
+  channel: Channels | null;
 };
 
 export default function ChatHeader(props: Props) {

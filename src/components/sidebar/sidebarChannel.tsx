@@ -1,9 +1,9 @@
-import { useAtom } from "jotai";
 import { channelAtom } from "@/state/channel";
-import { Channel } from "@/types/channel";
+import { Channels } from "@/types/supabase";
+import { useAtom } from "jotai";
 
 type Props = {
-  channel: Channel;
+  channel: Channels;
 };
 
 export default function SidebarChannel(props: Props) {
