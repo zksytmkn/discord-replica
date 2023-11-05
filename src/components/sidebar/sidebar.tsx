@@ -13,9 +13,9 @@ import { IcBaselineGroupAdd } from "@/components/icones/icBaselineGroupAdd";
 import { IcBaselineHeadphones } from "@/components/icones/icBaselineHeadphones";
 import { IcBaselineMic } from "@/components/icones/icBaselineMic";
 import { IcRoundSettings } from "@/components/icones/icRoundSettings";
-import { RadixIconsChevronDown } from "@/components/icones/radixIconsChevronDown";
 import { RadixIconsPlus } from "@/components/icones/radixIconsPlus";
 import SidebarChannel from "@/components/sidebar/sidebarChannel";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 export default function Sidebar({
@@ -59,27 +59,25 @@ export default function Sidebar({
       </div>
       {/* sidebarRight */}
       <div className="bg-[#2b2d33] w-72 relative grow">
-        <div className="text-[#ffffff] flex items-center justify-between p-5">
-          <h1>Discord</h1>
-          <RadixIconsChevronDown />
-        </div>
+        <Accordion type="single" collapsible>
+          <AccordionItem value="item-1" className="text-[#ffffff] p-5">
+            <AccordionTrigger>Discord</AccordionTrigger>
+            <AccordionContent>
+              {/* sidebarChannels */}
+              <div className="text-white flex justify-between items-center mt-1">
+                Channels
+                <RadixIconsPlus className="cursor-pointer" onClick={addChannel} />
+              </div>
+              <div className="sidebarChennelList">
+                {channels?.map((channel) => (
+                  <SidebarChannel channel={channel} key={channel.id} />
+                ))}
+              </div>
+            </AccordionContent>
+          </AccordionItem>
+        </Accordion>
 
-        {/* sidebarChannels */}
         <div className="p-3">
-          <div className="text-white flex justify-between items-center mt-1">
-            <div className="flex items-center">
-              <RadixIconsChevronDown className="mr-1" />
-              <h4>Programming Channel</h4>
-            </div>
-            <RadixIconsPlus className="cursor-pointer" onClick={addChannel} />
-          </div>
-
-          <div className="sidebarChennelList">
-            {channels?.map((channel) => (
-              <SidebarChannel channel={channel} key={channel.id} />
-            ))}
-          </div>
-
           <div className="absolute bottom-0 flex items-center justify-between w-11/12 py-2 border-t border-solid border-[#686a6e] ml-">
             <div className="flex items-center">
               <Avatar onClick={handleSignOut}>
