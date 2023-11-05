@@ -22,14 +22,15 @@ export default function ChatHeader(props: Props) {
           {channel ? channel.name : "No channel selected"}
         </h3>
       </div>
-
-      <div className="pr-4 flex items-center gap-3 text-[#7b7c85]">
-        <IcBaselineNotifications className="cursor-pointer" />
-        <IcBaselinePushPin className="cursor-pointer" />
-        <IcBaselinePeopleAlt className="cursor-pointer" />
-        <Input className="bg-transparent text-white" type="text" placeholder="検索" />
-        <IcBaselineSend className="cursor-pointer" />
-        <IcBaselineHelp className="cursor-pointer" />
+      <div className="hidden lg:inline-block">
+        <div className="pr-4 flex items-center gap-3 text-[#7b7c85]">
+          <IcBaselineNotifications className="cursor-pointer" />
+          <IcBaselinePushPin className="cursor-pointer" />
+          <IcBaselinePeopleAlt className="cursor-pointer" />
+          <Input className="bg-transparent text-white" type="text" placeholder="検索" />
+          <IcBaselineSend className="cursor-pointer" />
+          <IcBaselineHelp className="cursor-pointer" />
+        </div>
       </div>
     </div>
   );
