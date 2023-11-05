@@ -50,7 +50,7 @@ export default function Chat({
       const { data } = await supabase
         .from("messages")
         .insert({ message: inputText, channel_id: channel?.id, user_id: user?.id })
-        .select();
+        .select(`id, created_at, message, channel_id, user:users (id, name, avatar_url)`);
       setMessages(data ? [...messages, ...data] : messages);
       setInputText("");
     }
@@ -83,10 +83,12 @@ export default function Chat({
           </button>
         </form>
 
-        <div className="flex gap-1">
-          <IcOutlineCardGiftcard />
-          <IcBaselineGif />
-          <IcBaselineEmojiEmotions />
+        <div className="hidden lg:inline-block">
+          <div className="flex gap-1">
+            <IcOutlineCardGiftcard />
+            <IcBaselineGif />
+            <IcBaselineEmojiEmotions />
+          </div>
         </div>
       </div>
     </div>

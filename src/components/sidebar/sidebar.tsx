@@ -9,6 +9,7 @@ import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { UserMetadata } from "@supabase/supabase-js";
 import { useHydrateAtoms } from "jotai/utils";
 
+import { IcBaselineGroupAdd } from "@/components/icones/icBaselineGroupAdd";
 import { IcBaselineHeadphones } from "@/components/icones/icBaselineHeadphones";
 import { IcBaselineMic } from "@/components/icones/icBaselineMic";
 import { IcRoundSettings } from "@/components/icones/icRoundSettings";
@@ -49,8 +50,11 @@ export default function Sidebar({
         <div className="my-2 p-1">
           <img className="w-12" src="./discord.png" alt="" />
         </div>
-        <div className="w-15 h-15 bg-[#33363d] rounded-full my-2 p-1">
+        <div className="my-2 p-1 bg-[#33363d] rounded-full">
           <img className="w-12" src="./react.png" alt="" />
+        </div>
+        <div className="my-2 p-1 sm:hidden">
+          <IcBaselineGroupAdd className="w-5 h-5 text-white" />
         </div>
       </div>
       {/* sidebarRight */}
