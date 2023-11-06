@@ -34,7 +34,7 @@ export default async function Home() {
 
   return (
     <>
-      <div className="flex overflow-y-hidden">
+      <div className="flex h-screen">
         {session ? (
           <>
             <Sidebar user={metadata} channels={channels || []} />
