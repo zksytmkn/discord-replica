@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { channelAtom } from "@/state/channel";
 import { userAtom } from "@/state/user";
@@ -56,6 +56,15 @@ export default function Chat({
     }
   };
 
+  const scrollBottomRef = useRef<HTMLDivElement>(null);
+  const scrollToBottom = () => {
+    scrollBottomRef?.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
+
   return (
     <div className="flex flex-col grow bg-[#33363d]">
       {/* chatHeader */}
@@ -65,6 +74,7 @@ export default function Chat({
         {messages?.map((message) => (
           <ChatMessage message={message} key={message.id} />
         ))}
+        <div ref={scrollBottomRef} />
       </div>
       {/* chatInput */}
       <div className="flex items-center justify-between p-4 bg-[#474b53] rounded m-5 text-[lightgray]">
