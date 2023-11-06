@@ -17,6 +17,14 @@ import { RadixIconsPlus } from "@/components/icones/radixIconsPlus";
 import SidebarChannel from "@/components/sidebar/sidebarChannel";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 export default function Sidebar({
   user,
@@ -53,12 +61,37 @@ export default function Sidebar({
         <div className="my-2 p-1 bg-[#33363d] rounded-full">
           <img className="w-12" src="./react.png" alt="" />
         </div>
-        <div className="my-2 p-1 sm:hidden">
-          <IcBaselineGroupAdd className="w-5 h-5 text-white" />
-        </div>
+        <DropdownMenu>
+          <DropdownMenuTrigger className="my-2 p-1 sm:hidden">
+            <IcBaselineGroupAdd className="w-5 h-5 text-white" />
+          </DropdownMenuTrigger>
+          <DropdownMenuContent>
+            <DropdownMenuLabel className="flex justify-between items-center">
+              Channels
+              <RadixIconsPlus className="cursor-pointer" onClick={addChannel} />
+            </DropdownMenuLabel>
+            <DropdownMenuSeparator />
+            <div className="w-60 max-h-60 overflow-auto">
+              <DropdownMenuItem className="flex flex-col items-start">
+                {channels?.map((channel) => (
+                  <SidebarChannel channel={channel} key={channel.id} />
+                ))}
+              </DropdownMenuItem>
+            </div>
+            <DropdownMenuSeparator />
+            <DropdownMenuLabel>Profile</DropdownMenuLabel>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem className="text-[#686a6e]">{user?.name || "unknown"}</DropdownMenuItem>
+            <DropdownMenuItem className="text-[#686a6e]">
+              {`#${user?.provider_id ? user.provider_id.substring(0, 4) : "#unknown"}`}
+            </DropdownMenuItem>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem onClick={handleSignOut}>Log out</DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
       </div>
       {/* sidebarRight */}
-      <div className="bg-[#2b2d33] w-72 relative grow">
+      <div className="bg-[#2b2d33] w-72 relative grow hidden sm:inline-block">
         <Accordion type="single" collapsible>
           <AccordionItem value="item-1" className="text-[#ffffff] p-5">
             <AccordionTrigger>Discord</AccordionTrigger>
