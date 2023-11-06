@@ -52,7 +52,7 @@ export default function Sidebar({
   };
 
   return (
-    <div className="flex flex-0.3 h-screen">
+    <div className="flex flex-0.3">
       {/* sidebarLeft */}
       <div className="flex flex-col items-center bg-[#1a1c20] py-2 px-4">
         <div className="my-2 p-1">

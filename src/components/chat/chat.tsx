@@ -61,7 +61,7 @@ export default function Chat({
       {/* chatHeader */}
       <ChatHeader channel={channel} />
       {/* chatMessage */}
-      <div className="grow">
+      <div className="grow overflow-auto">
         {messages?.map((message) => (
           <ChatMessage message={message} key={message.id} />
         ))}
