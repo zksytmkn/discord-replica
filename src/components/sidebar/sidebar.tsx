@@ -61,6 +61,12 @@ export default function Sidebar({
         <div className="my-2 p-1 bg-[#33363d] rounded-full">
           <img className="w-12" src="./react.png" alt="" />
         </div>
+        <div className="my-2 p-1">
+          <img className="w-12" src="./next.png" alt="" />
+        </div>
+        <div className="my-2 p-1">
+          <img className="w-12" src="./supabase.png" alt="" />
+        </div>
         <DropdownMenu>
           <DropdownMenuTrigger className="my-2 p-1 sm:hidden">
             <IcBaselineGroupAdd className="w-5 h-5 text-white" />
@@ -71,7 +77,7 @@ export default function Sidebar({
               <RadixIconsPlus className="cursor-pointer" onClick={addChannel} />
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
-            <div className="w-60 max-h-60 overflow-auto">
+            <div className="w-60 max-h-36 overflow-auto">
               <DropdownMenuItem className="flex flex-col items-start">
                 {channels?.map((channel) => (
                   <SidebarChannel channel={channel} key={channel.id} />
