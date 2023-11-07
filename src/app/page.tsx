@@ -8,7 +8,8 @@ import Login from "@/components/login/login";
 import Sidebar from "@/components/sidebar/sidebar";
 
 export default async function Home() {
-  const supabase = createServerComponentClient<Database>({ cookies });
+  const cookieStore = cookies();
+  const supabase = createServerComponentClient<Database>({ cookies: () => cookieStore });
 
   const {
     data: { session },
