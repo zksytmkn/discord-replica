@@ -17,7 +17,7 @@ export default function Login() {
           theme: ThemeSupa,
         }}
         providers={["github", "google"]}
-        redirectTo="http://localhost:3000/auth/callback"
+        redirectTo={`${process.env.NEXT_PUBLIC_BASE_URL}/auth/callback`}
         onlyThirdPartyProviders={true}
       />
     </div>
