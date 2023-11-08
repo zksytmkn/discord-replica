@@ -33,30 +33,9 @@ export default async function Home() {
     .select(`id, created_at, message, channel_id, user:users (id, name, avatar_url)`)
     .match({ channel_id: channels ? channels[0].id : null });
 
-  // Solutions for Safari address bar display issues
-  if (typeof window !== "undefined") {
-    const setFillHeight = () => {
-      const vh = window.innerHeight * 0.01;
-      document.documentElement.style.setProperty("--vh", `${vh}px`);
-    };
-
-    let vw = window.innerWidth;
-
-    window.addEventListener("resize", () => {
-      if (vw === window.innerWidth) {
-        return;
-      }
-
-      vw = window.innerWidth;
-      setFillHeight();
-    });
-
-    setFillHeight();
-  }
-
   return (
     <>
-      <div className="flex h-screen" style={{ height: "calc(var(--vh, 1vh) * 100)" }}>
+      <div className="flex h-screen">
         {session ? (
           <>
             <Sidebar user={metadata} channels={channels || []} />
