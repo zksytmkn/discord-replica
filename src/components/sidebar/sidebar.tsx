@@ -52,36 +52,34 @@ export default function Sidebar({
   };
 
   return (
-    <div className="flex flex-0.3">
+    <div className="flex">
       {/* sidebarLeft */}
-      <div className="flex flex-col items-center bg-[#1a1c20] py-2 px-4">
+      <div className="flex flex-col items-center bg-[#1a1c20] px-4 py-2">
         <div className="my-2 p-1">
           <img className="w-12" src="./discord.png" alt="" />
         </div>
-        <div className="my-2 p-1 bg-[#33363d] rounded-full">
+        <div className="my-2 hidden rounded-full bg-[#33363d] p-1 sm:inline-block">
           <img className="w-12" src="./react.png" alt="" />
         </div>
-        <div className="my-2 p-1">
+        <div className="my-2 hidden p-1 sm:inline-block">
           <img className="w-12" src="./next.png" alt="" />
         </div>
-        <div className="my-2 p-1">
+        <div className="my-2 hidden p-1 sm:inline-block">
           <img className="w-12" src="./supabase.png" alt="" />
         </div>
         <DropdownMenu>
           <DropdownMenuTrigger className="my-2 p-1 sm:hidden">
-            <IcBaselineGroupAdd className="w-5 h-5 text-white" />
+            <IcBaselineGroupAdd className="h-5 w-5 text-white" />
           </DropdownMenuTrigger>
           <DropdownMenuContent>
-            <DropdownMenuLabel className="flex justify-between items-center">
+            <DropdownMenuLabel className="flex items-center justify-between">
               Channels
               <RadixIconsPlus className="cursor-pointer" onClick={addChannel} />
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
-            <div className="w-60 max-h-36 overflow-auto">
+            <div className="max-h-36 w-60 overflow-auto">
               <DropdownMenuItem className="flex flex-col items-start">
-                {channels?.map((channel) => (
-                  <SidebarChannel channel={channel} key={channel.id} />
-                ))}
+                {channels?.map((channel) => <SidebarChannel channel={channel} key={channel.id} />)}
               </DropdownMenuItem>
             </div>
             <DropdownMenuSeparator />
@@ -97,34 +95,30 @@ export default function Sidebar({
         </DropdownMenu>
       </div>
       {/* sidebarRight */}
-      <div className="bg-[#2b2d33] w-72 relative grow hidden sm:inline-block">
+      <div className="relative hidden w-72 grow bg-[#2b2d33] sm:inline-block">
         <Accordion type="single" collapsible>
-          <AccordionItem value="item-1" className="text-[#ffffff] p-5">
+          <AccordionItem value="item-1" className="p-5 text-[#ffffff]">
             <AccordionTrigger>Discord</AccordionTrigger>
             <AccordionContent>
               {/* sidebarChannels */}
-              <div className="text-white flex justify-between items-center mt-1">
+              <div className="mt-1 flex items-center justify-between text-white">
                 Channels
                 <RadixIconsPlus className="cursor-pointer" onClick={addChannel} />
               </div>
-              <div className="sidebarChennelList">
-                {channels?.map((channel) => (
-                  <SidebarChannel channel={channel} key={channel.id} />
-                ))}
-              </div>
+              {channels?.map((channel) => <SidebarChannel channel={channel} key={channel.id} />)}
             </AccordionContent>
           </AccordionItem>
         </Accordion>
 
         <div className="p-3">
-          <div className="absolute bottom-0 flex items-center justify-between w-11/12 py-2 border-t border-solid border-[#686a6e] ml-">
+          <div className="absolute bottom-0 flex w-11/12 items-center justify-between border-t border-solid border-[#686a6e] py-2">
             <div className="flex items-center">
               <Avatar onClick={handleSignOut}>
                 <AvatarImage src={user?.avatar_url} />
                 <AvatarFallback>CN</AvatarFallback>
               </Avatar>
               <div className="ml-1">
-                <h4 className="text-white font-medium">{user?.name || "unknown"}</h4>
+                <h4 className="font-medium text-white">{user?.name || "unknown"}</h4>
                 <span className="text-[#686a6e]">
                   {`#${user?.provider_id ? user.provider_id.substring(0, 4) : "#unknown"}`}
                 </span>

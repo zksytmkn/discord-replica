@@ -9,8 +9,8 @@ export default function Login() {
   const supabase = createClientComponentClient<Database>();
 
   return (
-    <div className="flex flex-col justify-center items-center w-full gap-8">
-      <img className="object-cover h-[150px]" src="./discord.png" alt="" />
+    <div className="flex w-full flex-col items-center justify-center gap-8">
+      <img className="h-[150px] object-cover" src="./discord.png" alt="" />
       <Auth
         supabaseClient={supabase}
         appearance={{
