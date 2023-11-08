@@ -15,15 +15,15 @@ export default function ChatHeader(props: Props) {
   const { channel } = props;
 
   return (
-    <div className="flex items-center justify-between w-full pt-2">
+    <div className="flex w-full items-center justify-between pt-2">
       <div className="pl-4">
         <h3 className="text-white">
-          <span className="text-[#7b7c85] pr-2">#</span>
+          <span className="pr-2 text-[#7b7c85]">#</span>
           {channel ? channel.name : "No channel selected"}
         </h3>
       </div>
       <div className="hidden lg:inline-block">
-        <div className="pr-4 flex items-center gap-3 text-[#7b7c85]">
+        <div className="flex items-center gap-3 pr-4 text-[#7b7c85]">
           <IcBaselineNotifications className="cursor-pointer" />
           <IcBaselinePushPin className="cursor-pointer" />
           <IcBaselinePeopleAlt className="cursor-pointer" />

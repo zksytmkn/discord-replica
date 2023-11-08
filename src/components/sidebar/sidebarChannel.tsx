@@ -11,9 +11,9 @@ export default function SidebarChannel(props: Props) {
   const [, setChannel] = useAtom(channelAtom);
 
   return (
-    <div className="pl-5 mt-1" onClick={() => setChannel(channel)}>
-      <h4 className="text-[#7b7c85] flex items-center p-1 cursor-pointer hover:text-white hover:bg-[#33363d] hover:rounded-md">
-        <span className="text-xl pr-2">#</span>
+    <div className="mt-1 pl-5" onClick={() => setChannel(channel)}>
+      <h4 className="flex cursor-pointer items-center p-1 text-[#7b7c85] hover:rounded-md hover:bg-[#33363d] hover:text-white">
+        <span className="pr-2 text-xl">#</span>
         {channel.name}
       </h4>
     </div>

@@ -66,22 +66,20 @@ export default function Chat({
   }, [messages]);
 
   return (
-    <div className="flex flex-col grow bg-[#33363d]">
+    <div className="flex grow flex-col bg-[#33363d]">
       {/* chatHeader */}
       <ChatHeader channel={channel} />
       {/* chatMessage */}
       <div className="grow overflow-auto">
-        {messages?.map((message) => (
-          <ChatMessage message={message} key={message.id} />
-        ))}
+        {messages?.map((message) => <ChatMessage message={message} key={message.id} />)}
         <div ref={scrollBottomRef} />
       </div>
       {/* chatInput */}
-      <div className="flex items-center justify-between p-4 bg-[#474b53] rounded m-5 text-[lightgray]">
+      <div className="m-5 flex items-center justify-between rounded bg-[#474b53] p-4 text-[lightgray]">
         <IcBaselineAddCircleOutline />
         <form className="grow">
           <input
-            className="p-4 bg-transparent border-none outline-none text-white text-lg w-full"
+            className="w-full border-none bg-transparent p-4 text-lg text-white outline-none"
             type="text"
             placeholder={channel?.name ? `Send a message to #${channel.name}` : ""}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setInputText(e.target.value)}
