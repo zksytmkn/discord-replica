@@ -35,7 +35,7 @@ export default async function Home() {
 
   return (
     <>
-      <div className="flex h-screen">
+      <div className="flex min-h-screen">
         {session ? (
           <>
             <Sidebar user={metadata} channels={channels || []} />
