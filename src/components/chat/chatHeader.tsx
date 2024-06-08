@@ -15,7 +15,7 @@ export default function ChatHeader(props: Props) {
   const { channel } = props;
 
   return (
-    <div className="flex w-full items-center justify-between pt-2">
+    <div className="flex w-full items-center justify-between py-2">
       <div className="pl-4">
         <h3 className="text-white">
           <span className="pr-2 text-[#7b7c85]">#</span>

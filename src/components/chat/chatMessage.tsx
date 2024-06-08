@@ -17,7 +17,7 @@ export default function ChatMessage(props: Props) {
       </Avatar>
       <div className="py-5 pl-2 pr-5">
         <h4>
-          {message.user?.name || "unknown"}
+          <span className="hidden sm:inline">{message.user?.name || "unknown"}</span>
           <span className="ml-5 text-base text-[#7b7c85]">{new Date(message.created_at).toLocaleString()}</span>
         </h4>
         <p>{message.message}</p>
