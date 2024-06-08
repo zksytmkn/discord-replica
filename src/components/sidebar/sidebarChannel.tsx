@@ -12,7 +12,7 @@ export default function SidebarChannel(props: Props) {
 
   return (
     <div className="mt-1 pl-5" onClick={() => setChannel(channel)}>
-      <h4 className="flex cursor-pointer items-center p-1 text-[#7b7c85] hover:rounded-md hover:bg-[#33363d] hover:text-white">
+      <h4 className="flex cursor-pointer items-center p-1 text-[#7b7c85] sm:hover:rounded-md sm:hover:bg-[#33363d] sm:hover:text-white">
         <span className="pr-2 text-xl">#</span>
         {channel.name}
       </h4>
