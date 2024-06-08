@@ -89,7 +89,7 @@ export default function Sidebar({
             <DropdownMenuItem className="text-[#686a6e]">
               {user?.name || "unknown"}
               <DropdownMenuShortcut>{`#${
-                user?.provider_id ? user.provider_id.substring(0, 4) : "#unknown"
+                user?.provider_id ? user.provider_id.substring(0, 4) : "unknown"
               }`}</DropdownMenuShortcut>
             </DropdownMenuItem>
             <DropdownMenuSeparator />
@@ -123,7 +123,7 @@ export default function Sidebar({
               <div className="ml-1">
                 <h4 className="font-medium text-white">{user?.name || "unknown"}</h4>
                 <span className="text-[#686a6e]">
-                  {`#${user?.provider_id ? user.provider_id.substring(0, 4) : "#unknown"}`}
+                  {`#${user?.provider_id ? user.provider_id.substring(0, 4) : "unknown"}`}
                 </span>
               </div>
             </div>
