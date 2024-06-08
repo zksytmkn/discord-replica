@@ -71,7 +71,7 @@ export default function Sidebar({
           <DropdownMenuTrigger className="my-2 p-1 sm:hidden">
             <IcBaselineGroupAdd className="h-5 w-5 text-white" />
           </DropdownMenuTrigger>
-          <DropdownMenuContent>
+          <DropdownMenuContent className="ml-1">
             <DropdownMenuLabel className="flex items-center justify-between">
               Channels
               <RadixIconsPlus className="cursor-pointer" onClick={addChannel} />
