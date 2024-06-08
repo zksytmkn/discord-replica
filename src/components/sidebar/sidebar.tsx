@@ -23,6 +23,7 @@ import {
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
+  DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
@@ -85,9 +86,11 @@ export default function Sidebar({
             <DropdownMenuSeparator />
             <DropdownMenuLabel>Profile</DropdownMenuLabel>
             <DropdownMenuSeparator />
-            <DropdownMenuItem className="text-[#686a6e]">{user?.name || "unknown"}</DropdownMenuItem>
             <DropdownMenuItem className="text-[#686a6e]">
-              {`#${user?.provider_id ? user.provider_id.substring(0, 4) : "#unknown"}`}
+              {user?.name || "unknown"}
+              <DropdownMenuShortcut>{`#${
+                user?.provider_id ? user.provider_id.substring(0, 4) : "#unknown"
+              }`}</DropdownMenuShortcut>
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem onClick={handleSignOut}>Log out</DropdownMenuItem>
